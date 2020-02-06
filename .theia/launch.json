@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Cs508Hw1",
+            "request": "launch",
+            "mainClass": "Cs508Hw1",
+            "projectName": "ccsu-cs506_3723e029"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Cs506hw1",
             "request": "launch",
             "mainClass": "Cs506hw1",
