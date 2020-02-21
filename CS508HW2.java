@@ -33,7 +33,9 @@ public class CS508HW2 {
 
         for (int i=begin; i<end; i++) {
             BigInteger bigI = BigInteger.valueOf(arr[i]);
-            threadSum.add(bigI);
+            //threadSum.add(bigI);
+            BigInteger oldSum = threadSum;
+            threadSum = oldSum.add(bigI);
         }
 
         return threadSum;
@@ -53,7 +55,6 @@ public class CS508HW2 {
         
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt();
-            System.out.println(arr[i]);
         }
 
         for (int i=1; i <= 100; i++) {
