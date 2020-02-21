@@ -66,7 +66,7 @@ public class CS508HW2 {
                 
                 for (int y=0; y<i; y++) {
                 int begin=(arr.length/i)*y;
-                int end=begin+arr.length/i;
+                int end=begin+(arr.length/i);
                 futures.add(workers.submit(new SumPartial(arr,begin,end)));
                 }
                 
