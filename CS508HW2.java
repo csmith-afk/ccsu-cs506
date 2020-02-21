@@ -31,12 +31,10 @@ public class CS508HW2 {
 
         BigInteger threadSum = BigInteger.valueOf(0);
 
-        for (int i=begin; i<=end; i++) {
+        for (int i=begin; i<end; i++) {
             BigInteger bigI = BigInteger.valueOf(arr[i]);
             threadSum.add(bigI);
         }
-
-        //sum.set(sum.get().add(threadSum));
 
         return threadSum;
         }
@@ -55,6 +53,7 @@ public class CS508HW2 {
         
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt();
+            System.out.println(arr[i]);
         }
 
         for (int i=1; i <= 100; i++) {
@@ -63,38 +62,23 @@ public class CS508HW2 {
                 sum.set(BigInteger.valueOf(0));
                 ExecutorService workers = Executors.newFixedThreadPool(i);
                 List<Future<BigInteger>> futures = new ArrayList<>();
+                
                 for (int y=0; y<i; y++) {
-                int begin=arr.length/y;
+                int begin=(arr.length/i)*y;
                 int end=begin+arr.length/i;
                 futures.add(workers.submit(new SumPartial(arr,begin,end)));
                 }
+                
                 for (int z=0; z<futures.size(); z++) {
-                    sum.set(sum.get().add(futures.get(z).get()));
+                    BigInteger tempSum = futures.get(z).get();
+                    tempSum.add(sum.get());
+                    sum.set(tempSum);
                 }
                 long end = System.currentTimeMillis();
+                System.out.println("The number of threads is " + futures.size());
                 System.out.println("The sum is " + sum + " and the run time is " + (end-start));
+                System.out.println();
             }
-
         }
-
-        
     }
-
-/*
-    void createRunnable(int begin, int end) {
-        Thread t = new Thread(() -> sumFromArray(begin,end));
-        t.start();
-    }
-
-    void sumFromArray(int begin, int end) {
-        BigInteger threadSum = BigInteger.valueOf(0);
-
-        for (int i=begin; i<=end; i++) {
-            BigInteger bigI = BigInteger.valueOf(i);
-            threadSum.add(bigI);
-        }
-
-        sum.set(sum.get().add(threadSum));
-    }
-*/
 }
